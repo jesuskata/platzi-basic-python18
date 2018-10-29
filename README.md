@@ -2,6 +2,7 @@
   - [Palabras reservadas de Python](#palabras-reservadas-de-python)
   - [Variables y expresiones](#variables-y-expresiones)
   - [Funciones](#funciones)
+  - [Estructuras condicionales](#estructuras-condicionales)
 
 # Curso de Python 2018 de Platzi con David Aroesti
 
@@ -56,3 +57,20 @@ Para declarar funciones que no son las globales, las _built-in functions_, neces
 Con el keyword `def` declaramos una función.
 
 ![Tabla de Funciones Built-In de Python](./assets/python-built-in-functions.jpg)
+
+## Estructuras condicionales
+
+Para comprender el flujo de nuestro programa debemos entender un poco sobre estructuras y expresiones booleanas
+
+`==` se refiere a igualdad
+`!=` no hay igualdad.
+`>` mayor que
+`<` menor que
+`>=` mayor o igual
+`<=` menor o igual
+
+`and` unicamente es verdadero cuando ambos valores son verdaderos
+`or` es verdadero cuando uno de los dos valores es verdadero.
+`not` es lo contrario al valor. Falso es Verdadero. Verdadero es Falso.
+
+![Tabla de Conditionals de Python](./assets/python-conditionals.jpg)
