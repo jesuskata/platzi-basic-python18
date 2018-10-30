@@ -3,6 +3,7 @@
   - [Variables y expresiones](#variables-y-expresiones)
   - [Funciones](#funciones)
   - [Estructuras condicionales](#estructuras-condicionales)
+  - [Strings en Python](#strings-en-python)
 
 # Curso de Python 2018 de Platzi con David Aroesti
 
@@ -74,3 +75,31 @@ Para comprender el flujo de nuestro programa debemos entender un poco sobre estr
 `not` es lo contrario al valor. Falso es Verdadero. Verdadero es Falso.
 
 ![Tabla de Conditionals de Python](./assets/python-conditionals.jpg)
+
+## Strings en Python
+
+- Las cadenas (__strings__) son un tipo con comportamiento diferente a los _int_, _float_ y _bool_.
+  - Las cadenas son secuencias
+  - las secuencias se pueden acceder a través de un índice
+
+```python
+apple = 'apple'
+apple[1]
+```
+
+- Las cadenas (al igual que otras secuencias) tienen una logitud
+  - Para saber la longitud de una secuencia, se puede usar la función __len()__
+
+```
+len(apple)
+```
+
+- En Python, los caracteres que componen un string se reutilizan a lo largo del programa
+  - Esto ayuda a reducir la cantidad de memoria que necesita el programa
+  - También significa que las strings deben ser inmutables
+
+```python
+x = 'a'
+y = 'b'
+id(x) == id(y)
+```
