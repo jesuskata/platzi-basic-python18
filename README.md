@@ -8,6 +8,7 @@
   - [Strings en Python](#strings-en-python)
   - [Operaciones con Strings](#operaciones-con-strings)
   - [Slices en Python](#slices-en-python)
+  - [For loops](#for-loops)
 
 Este es un curso introductorio para aprender a programar con Python de Platzi. Es la última actualización de 2018 con David Aroesti nuevamente como profesor.
 
@@ -156,3 +157,22 @@ my_name[3:3] # returns ''
 my_name[:] # returns 'Alejandro'
 my_name[1:-1:2] # returns 'ljnr'
 ```
+
+## For loops
+
+Las _iteraciones_ es uno de los conceptos más importantes en la programación. En Python existen muchas manera de iterar pero las dos principales son los `for` loops y `while` loops.
+
+Los __for__ loops nos permiten iterar a través de una secuencia y los __while__ loops nos permiten iterara hasta cuando una condición se vuelva falsa.
+
+for loops:
+
+- Tienen dos keywords break y continue que nos permiten salir anticipadamente de la iteración
+- Se usan cuando se quiere ejecutar varias veces una o varias instrucciones.
+
+```python
+for [variable] in [secuencia]:
+```
+
+Es una convención usar la letra `i` como variable en nuestro for, pero podemos colocar la que queramos.
+
+__range__: Nos da un objeto rango, es un iterador sobre el cual podemos generar secuencias.
