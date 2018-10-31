@@ -1,5 +1,21 @@
 clients = 'pablo,ricardo,'
 
+# Reusable functions
+def _add_comma():
+    global clients
+
+    clients += ','
+
+
+def _not_founded():
+    return print('Client is not in the clients list')
+
+
+def _get_client_name():
+    return input('What is the client name? ')
+
+
+# Action functions
 def create_client(client_name):
     global clients
 
@@ -22,13 +38,16 @@ def update_client(client_name, updated_client_name):
     if client_name in clients:
         clients = clients.replace(client_name + ',', updated_client_name + ',')
     else:
-        print('Client is not in the clients list')
+        _not_founded()
 
 
-def _add_comma():
+def delete_client(client_name):
     global clients
 
-    clients += ','
+    if client_name in clients:
+        clients = clients.replace(client_name + ',', '')
+    else:
+        _not_founded()
 
 
 def _print_welcome():
@@ -38,10 +57,6 @@ def _print_welcome():
     print('[C]reate client')
     print('[U]pdate client')
     print('[D]elete client')
-
-
-def _get_client_name():
-    return input('What is the client name? ')
 
 
 if __name__ == '__main__':
@@ -60,6 +75,8 @@ if __name__ == '__main__':
         update_client(client_name.lower(), updated_client_name)
         list_clients()
     elif command == 'D':
-        pass
+        client_name = _get_client_name()
+        delete_client(client_name.lower())
+        list_clients()
     else:
         print('Invalid command! Please try again')
