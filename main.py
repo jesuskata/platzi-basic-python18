@@ -1,10 +1,31 @@
 import sys
 
-clients = ['pablo', 'ricardo']
+clients = [
+    {
+        'name': 'pablo',
+        'company': 'Google',
+        'email': 'pablo@google.com',
+        'position': 'Softwre engineer'
+    },
+    {
+        'name': 'ricardo',
+        'company': 'Facebook',
+        'email': 'ricardo@facebook.com',
+        'position': 'Data engineer'
+    }
+]
 
 # Reusable functions
 def _not_founded():
     return print('Client is not in the clients list')
+
+
+def _get_client_field(field_name):
+    field = None
+
+    while not field:
+        field = input(f'What is the client {field_name}? ')
+    return field
 
 
 def _get_client_name():
@@ -23,19 +44,34 @@ def _get_client_name():
     return client_name
 
 
+def _get_clients_data():
+    return {
+        'name': _get_client_field('name'),
+        'company': _get_client_field('company'),
+        'email': _get_client_field('email'),
+        'position': _get_client_field('position')
+    }
+
+
 # Action functions
-def create_client(client_name):
+def create_client(client):
     global clients
 
-    if client_name not in clients:
-        clients.append(client_name)
+    if client not in clients:
+        clients.append(client)
     else:
         print('The client you enter is already on the client\'s list. Please try again')
 
 
 def list_clients():
     for idx, client in enumerate(clients):
-        print(f'{idx}: {client}')
+        print('{uid} | {name} | {company} | {email} | {position}'.format(
+            uid = idx,
+            name = client['name'],
+            company = client['company'],
+            email = client['email'],
+            position = client['position']
+        ))
 
 
 def update_client(client_name, updated_client_name):
@@ -83,8 +119,8 @@ if __name__ == '__main__':
     command = command.upper()
 
     if command == 'C':
-        client_name = _get_client_name()
-        create_client(client_name)
+        client = _get_clients_data()
+        create_client(client)
         list_clients()
     elif command == 'L':
         list_clients()
