@@ -56,7 +56,7 @@ if __name__ == '__main__':
         list_clients()
     elif command == 'U':
         client_name = _get_client_name()
-        updated_client_name = input('What is the updated cliente name? ')
+        updated_client_name = input('What is the updated client name? ')
         update_client(client_name.lower(), updated_client_name)
         list_clients()
     elif command == 'D':
