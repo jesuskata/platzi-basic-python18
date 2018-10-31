@@ -1,11 +1,12 @@
+# Curso de Python 2018 de Platzi con David Aroesti
+
 - [Curso de Python 2018 de Platzi con David Aroesti](#curso-de-python-2018-de-platzi-con-david-aroesti)
   - [Palabras reservadas de Python](#palabras-reservadas-de-python)
   - [Variables y expresiones](#variables-y-expresiones)
   - [Funciones](#funciones)
   - [Estructuras condicionales](#estructuras-condicionales)
   - [Strings en Python](#strings-en-python)
-
-# Curso de Python 2018 de Platzi con David Aroesti
+  - [Operaciones con Strings](#operaciones-con-strings)
 
 Este es un curso introductorio para aprender a programar con Python de Platzi. Es la última actualización de 2018 con David Aroesti nuevamente como profesor.
 
@@ -90,7 +91,7 @@ apple[1]
 - Las cadenas (al igual que otras secuencias) tienen una logitud
   - Para saber la longitud de una secuencia, se puede usar la función __len()__
 
-```
+```python
 len(apple)
 ```
 
@@ -102,4 +103,38 @@ len(apple)
 x = 'a'
 y = 'b'
 id(x) == id(y)
+```
+
+## Operaciones con Strings
+
+Los strings tienen varios métodos que nosotros podemos utilizar.
+
+- __upper__: convierte todo el string a mayúsculas
+- __lower__: convierte todo el string a minúsculas
+- __find__: encuentra el indice en donde existe un patrón que nosotros definimos
+- __startswith__: significa que empieza con algún patrón.
+- __endswith__: significa que termina con algún patrón
+- __capitalize__: coloca la primera letra en mayúscula y el resto en minúscula
+
+__in__ y __not in__ nos permite saber con cualquier secuencia sin una subsecuencia o substrings se encuentra adentro de la secuencia mayor.
+
+__dir__: Nos dice todos los métodos que podemos utilizar dentro de un objeto.
+
+```python
+constante_perro = 'perro'
+dir(constante_perro)
+```
+
+__help__: nos imprime en pantalla el _docstrings_ o comentario de ayuda o instrucciones que posee la función. Casi todas las funciones en Python las tienen.
+
+```python
+def my_function():
+    """Este es un texto de ayuda de cómo usar esta función"""
+    pass
+```
+
+Ahora, al correr Python, podemos ver dicha documentación:
+
+```python
+help(my_function)
 ```
