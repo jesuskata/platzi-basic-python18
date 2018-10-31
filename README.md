@@ -7,6 +7,7 @@
   - [Estructuras condicionales](#estructuras-condicionales)
   - [Strings en Python](#strings-en-python)
   - [Operaciones con Strings](#operaciones-con-strings)
+  - [Slices en Python](#slices-en-python)
 
 Este es un curso introductorio para aprender a programar con Python de Platzi. Es la última actualización de 2018 con David Aroesti nuevamente como profesor.
 
@@ -137,4 +138,21 @@ Ahora, al correr Python, podemos ver dicha documentación:
 
 ```python
 help(my_function)
+```
+
+## Slices en Python
+
+Los _slices_ en Python nos permiten nos permiten manejar secuencia de manera poderosa.
+
+Al significar _rebanada_ la funcionalidad está más que dada. Los slices se usan de la siguiente manera: `secuencia[comienzo:final:pasos]`
+
+```python
+my_name = 'Alejandro'
+my_name[0] # returns 'A'
+my_name[-1] # returns 'o'
+my_name[0:3] # returns 'Ale'
+my_name[::2] # returns 'Aeado'
+my_name[3:3] # returns ''
+my_name[:] # returns 'Alejandro'
+my_name[1:-1:2] # returns 'ljnr'
 ```
