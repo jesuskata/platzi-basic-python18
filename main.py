@@ -17,14 +17,14 @@ clients = [
 
 # Reusable functions
 def _not_founded():
-    return print('Client is not in the clients list')
+    return print('Client is not in the client\'s list')
 
 
-def _get_client_field(field_name):
+def _get_client_field(field_name, message='What is the client {}? '):
     field = None
 
     while not field:
-        field = input(f'What is the client {field_name}? ')
+        field = input(message.format(field_name))
     return field
 
 
@@ -74,28 +74,27 @@ def list_clients():
         ))
 
 
-def update_client(client_name, updated_client_name):
+def update_client(client_id, updated_client):
     global clients
 
-    if client_name in clients:
-        index = clients.index(client_name)
-        clients[index] = updated_client_name
+    if len(clients) - 1 >= client_id:
+        clients[client_id] = updated_client
     else:
         _not_founded()
 
 
-def delete_client(client_name):
+def delete_client(client_id):
     global clients
 
-    if client_name in clients:
-        clients.remove(client_name)
-    else:
-        _not_founded()
+    for idx, client in enumerate(clients):
+        if idx == client_id:
+            del client[idx]
+            break
 
 
 def search_client(client_name):
     for client in clients:
-        if client != client_name:
+        if client['name'] != client_name:
             continue
         else:
             return True
@@ -125,16 +124,17 @@ if __name__ == '__main__':
     elif command == 'L':
         list_clients()
     elif command == 'U':
-        client_name = _get_client_name()
-        updated_client_name = input('What is the updated client name? ')
-        update_client(client_name.lower(), updated_client_name)
+        list_clients()
+        client_id = int(_get_client_field('id'))
+        updated_client = _get_clients_data()
+        update_client(client_id, updated_client)
         list_clients()
     elif command == 'D':
-        client_name = _get_client_name()
-        delete_client(client_name.lower())
+        client_id = int(_get_client_field('id'))
+        delete_client(client_id)
         list_clients()
     elif command == 'S':
-        client_name = _get_client_name().lower()
+        client_name = _get_client_field('name')
         found = search_client(client_name.lower())
 
         if found:
