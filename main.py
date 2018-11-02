@@ -1,19 +1,30 @@
 import sys
+import csv
+import os
 
-clients = [
-    {
-        'name': 'pablo',
-        'company': 'Google',
-        'email': 'pablo@google.com',
-        'position': 'Softwre engineer'
-    },
-    {
-        'name': 'ricardo',
-        'company': 'Facebook',
-        'email': 'ricardo@facebook.com',
-        'position': 'Data engineer'
-    }
-]
+
+CLIENT_TABLE = '.clients.csv'
+CLIENT_SCHEMA = ['name', 'company', 'email', 'position']
+clients = []
+
+
+def _initialize_clients_from_storage():
+    with open(CLIENT_TABLE, mode='r') as f:
+        reader = csv.DictReader(f, fieldnames=CLIENT_SCHEMA)
+
+        for row in reader:
+            clients.append(row)
+
+
+def _save_clients_to_storage():
+    tmp_table_name = f'{CLIENT_TABLE}.tmp'
+    with open(tmp_table_name, mode='w') as f:
+        writer = csv.DictWriter(f, fieldnames=CLIENT_SCHEMA)
+        writer.writerows(clients)
+
+        os.remove(CLIENT_TABLE)
+        os.rename(tmp_table_name, CLIENT_TABLE)
+
 
 # Reusable functions
 def _not_founded():
@@ -26,22 +37,6 @@ def _get_client_field(field_name, message='What is the client {}? '):
     while not field:
         field = input(message.format(field_name))
     return field
-
-
-def _get_client_name():
-    client_name = None
-
-    while not client_name:
-        client_name = input('What is the client name? ')
-
-        if client_name == 'exit':
-            client_name = None
-            break
-
-    if not client_name:
-        sys.exit()
-
-    return client_name
 
 
 def _get_clients_data():
@@ -86,9 +81,9 @@ def update_client(client_id, updated_client):
 def delete_client(client_id):
     global clients
 
-    for idx, client in enumerate(clients):
+    for idx, dummy_client in enumerate(clients):
         if idx == client_id:
-            del client[idx]
+            del clients[idx]
             break
 
 
@@ -112,6 +107,7 @@ def _print_welcome():
 
 
 if __name__ == '__main__':
+    _initialize_clients_from_storage()
     _print_welcome()
 
     command = input()
@@ -130,6 +126,7 @@ if __name__ == '__main__':
         update_client(client_id, updated_client)
         list_clients()
     elif command == 'D':
+        list_clients()
         client_id = int(_get_client_field('id'))
         delete_client(client_id)
         list_clients()
@@ -144,3 +141,5 @@ if __name__ == '__main__':
             print(f'The client: {client_name} is not in our client\'s list')
     else:
         print('Invalid command! Please try again')
+
+    _save_clients_to_storage()
