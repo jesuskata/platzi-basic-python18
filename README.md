@@ -12,6 +12,10 @@
   - [Decoradores](#decoradores)
     - [__Args y kwargs__](#args-y-kwargs)
   - [Programación orientada a objetos](#programaci%C3%B3n-orientada-a-objetos)
+  - [Scopes and namespaces](#scopes-and-namespaces)
+    - [Name o scope](#name-o-scope)
+    - [Namespace](#namespace)
+      - [Reglas de palabra clave global](#reglas-de-palabra-clave-global)
 
 Este es un curso introductorio para aprender a programar con Python de Platzi. Es la última actualización de 2018 con David Aroesti nuevamente como profesor.
 
@@ -296,3 +300,94 @@ __NOTAS!__: para declara una clase en __Python__ utilizamos la keyword class, de
 Un método fundamental es _dunder init_(`__init__`). Lo único que hace es inicializar la clase basado en los parámetros que le damos al momento de construir la clase.
 
 `self` es una referencia a la clase. Es una forma interna por la que podemos acceder a las propiedades y métodos.
+
+## Scopes and namespaces
+
+### Name o scope
+
+En Python, un __name__, también conocido como _identifier_, es simplemente una forma de otorgarle un nombre a un objeto. Mediante el nombre, podemos acceder al objeto. Por ejemplo:
+
+```python
+my_var = 5id(my_var) # 4561204416id(5) # 4561204416
+```
+
+En este caso, el identifier `my_var` es simplemente una forma de acceder a un objeto en memoria (en este caso el espacio identificado por el número _4561204416_). Es importante recordar que un name puede referirse a cualquier tipo de objeto (aún las funciones).
+
+```python
+def echo(value):
+    return value
+
+a = echo
+
+a('Billy') # 3
+```
+
+### Namespace
+
+Ahora que ya entendimos qué es un __name__ podemos avanzar a los __namespaces__ (espacios de nombres). Para ponerlo en palabras llanas, un namespace es simplemente un conjunto de names.
+
+En Python, te puedes imaginar que existe una relación que liga a los nombres definidos con sus respectivos objetos (como un diccionario). Pueden coexistir varios namespaces en un momento dado, pero se encuentran completamente aislados. Por ejemplo, existe un namespace específico que agrupa todas las variables globales (por eso puedes utilizar varias funciones sin tener que importar los módulos correspondientes) y cada vez que declaramos una módulo o una función, dicho módulo o función tiene asignado otro namespace.
+
+A pesar de existir una multiplicidad de namespaces, no siempre tenemos acceso a todos ellos desde un punto específico en nuestro programa. Es aquí donde el concepto de __scope__ (campo de aplicación) entra en juego.
+
+__Scope__ es la parte del programa en el que podemos tener acceso a un namespace sin necesidad de prefijos.
+
+En cualquier momento determinado, el programa tiene acceso a tres scopes:
+
+- El scope dentro de una función (que tiene nombres locales)
+- El scope del módulo (que tiene nombres globales)
+- El scope raíz (que tiene los built-in names)
+
+Cuando se solicita un objeto, Python busca primero el nombre en el scope _local_, luego en el _global_, y por último, en el _raíz_. Cuando anidamos una función dentro de otra función, su scope también queda anidado dentro del scope de la función padre.
+
+```python
+def outer_function(some_local_name):
+    def inner_function(other_local_name) # Tiene acceso a la built-in function print y al nombre local some_local_name
+        print(some_local_name)
+
+        # También tiene acceso a su scope local
+        print(other_local_name)
+```
+
+Para poder manipular una variable que se encuentra fuera del scope local podemos utilizar los keywords _global_ y _nonlocal_.
+
+```python
+some_var_int_other_scope = 10
+
+def some_function():
+    global some_var_int_other_scope
+
+    some_var_int_other_scope += 1
+```
+
+En Python, la palabra clave `global` permite modificar la variable fuera del alcance actual. Se utiliza para crear una variable global y realizar cambios en la variable en un contexto local.
+
+#### Reglas de palabra clave global
+
+Las reglas básicas para la palabra clave global en Python son:
+
+- Cuando creamos una variable dentro de una función, es local por defecto.
+- Cuando definimos una variable fuera de una función, es global por defecto. No tienes que usar la palabra clave global.
+- Utilizamos la palabra clave global para leer y escribir una variable global dentro de una función.
+- El uso de global fuera de una función no tiene efecto
+
+En lo referente a la palabra `nonlocal`, actúa de manera similar, solo que orientada a lo que sería un alcance de funciones y funciones anidadas, a continuación un ejemplo:
+
+```python
+def method():
+    def method2():
+        # Este método no tiene acceso a la variable value, por cuanto se usa nonlocal para poder acceder
+        nonlocal value
+        value = 100
+        return value
+
+    # Variable local
+    value = 10
+    print(type(value)) # int
+    print(type(method2)) # function
+    print(value, method2()) # 10, 100
+
+
+if __name__ == '__main__':
+    method()
+```
