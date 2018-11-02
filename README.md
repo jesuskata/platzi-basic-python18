@@ -16,6 +16,7 @@
     - [Name o scope](#name-o-scope)
     - [Namespace](#namespace)
       - [Reglas de palabra clave global](#reglas-de-palabra-clave-global)
+  - [Introducción a Click](#introducci%C3%B3n-a-click)
 
 Este es un curso introductorio para aprender a programar con Python de Platzi. Es la última actualización de 2018 con David Aroesti nuevamente como profesor.
 
@@ -391,3 +392,18 @@ def method():
 if __name__ == '__main__':
     method()
 ```
+
+## Introducción a Click
+
+Click es un pequeño framework que nos permite crear aplicaciones de Línea de comandos. Utiliza decoradores para implementar su funcionalidad.
+
+Nos otorga una interfaz que podemos personalizar. Además, autogenera ayuda para el usuario.
+
+Tiene cuatro decoradores básicos:
+
+- @click_group: agrupa una serie de comandos
+- @click_command: aca definiremos todos los comandos de nuestra apliacion
+- @click_argument: son parámetros necesarios
+- @click_option: son parámetros opcionales
+
+Click también realiza las conversiones de tipo por nosotros. Esta basado muy fuerte en decoradores.
