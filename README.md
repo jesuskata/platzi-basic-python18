@@ -11,6 +11,7 @@
   - [For loops](#for-loops)
   - [Decoradores](#decoradores)
     - [__Args y kwargs__](#args-y-kwargs)
+  - [Programación orientada a objetos](#programaci%C3%B3n-orientada-a-objetos)
 
 Este es un curso introductorio para aprender a programar con Python de Platzi. Es la última actualización de 2018 con David Aroesti nuevamente como profesor.
 
@@ -255,3 +256,20 @@ def test_value_args_kwargs(*args, **kwargs):
 if __name__ == '__main__':
     test_value_args_kwargs('jesus', 'eloisa', family = 'Romero Camarillo', city = 'Huajuapan')
 ```
+
+## Programación orientada a objetos
+
+La programación orientada a objetos es un _paradigma de programación_ que otorga los medios para estructurar programas de tal manera que las propiedades y comportamientos estén envueltos en objetos individuales.
+
+Para poder entender cómo modelar estos objetos tenemos que tener claros cuatro principios:
+
+- __Encapsulamiento__: cada objeto tiene sus propias funciones, y datos sin afectar a otros, son lógica interna.
+- __Abstracción__: el usuario podrá interactuar con el objeto sin necesidad de conocer toda la lógica del mismo.
+- __Herencia__: si se declara un método en una clase todas las subclases heredan ese método, es decir: si tu declaras un método “imprime” que ejecute un print en una clase, las subclases podrán usar el método imprime, sin necesidad de declararlo en cada una.
+- __Polimorfismo__: usando el ejemplo anterior, en cada subclase se puede modificar el método “imprime” por lo tal cada sub clase contara con un método imprime pero acorde a las necesidades de cada subclase.
+
+Todos los objetos son una instancia de una clase. Las _clases_ simplemente nos sirven como un molde para poder generar diferentes instancias.
+
+Los tipos básicos de Python (str, int, bool, etc.) están diseñados para representar cosas simples. Cuando requerimos crear estructuras más complejas (por ejemplo, un avión), podemos entonces utilizar clases.
+
+La instancia, es el objeto concreto con valores reales.
