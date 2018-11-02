@@ -226,7 +226,7 @@ if __name__ == '__main__':
 - El tipo de valor es una tupla
 - Son convertidos los argumentos separados por _coma_
 
-Ejemplo de __wargs__
+Ejemplo de __kwargs__
 
 ```python
 def test_value_kwargs(**kwargs):
@@ -234,7 +234,7 @@ def test_value_kwargs(**kwargs):
         for key, value in kwargs.items():
             print(f'{key} == {value}')
 
-    print(type(kwargs))
+    print(type(kwargs)) # dict
 
 
 if __name__ == '__main__':
@@ -245,11 +245,11 @@ Ejemplo de __args y kwargs__
 
 ```python
 def test_value_args_kwargs(*args, **kwargs):
-    print(type(args))
-    print(args)
-    print('*' * 50)
-    print(type(kwargs))
-    print(kwargs)
+    print(type(args)) # tuple
+    print(args) # ('jesus', 'eloisa')
+    print('*' * 50) # **************************************************
+    print(type(kwargs)) # dict
+    print(kwargs) # {'family': 'Romero Camarillo', 'city': 'Huajuapan'}
 
 
 if __name__ == '__main__':
