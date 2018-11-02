@@ -273,3 +273,26 @@ Todos los objetos son una instancia de una clase. Las _clases_ simplemente nos s
 Los tipos básicos de Python (str, int, bool, etc.) están diseñados para representar cosas simples. Cuando requerimos crear estructuras más complejas (por ejemplo, un avión), podemos entonces utilizar clases.
 
 La instancia, es el objeto concreto con valores reales.
+
+Ejemplo de __class__
+
+```python
+class Airplane:
+    def __init__(self, passengers, seats, pilots=[]):
+        self.passengers = passengers
+        self.seats = seats
+        self._pilots = pilots
+
+        def takeoff(self):
+            pass
+
+    airplain = Airplane(passengers=20, seats=30, pilots=['Tom', 'Billy'])
+    airplain.passengers = 31
+    airplain.takeoff()
+```
+
+__NOTAS!__: para declara una clase en __Python__ utilizamos la keyword class, después de eso le damos el nombre. Una convención en Python es que todas las clases empiecen con _mayúscula_ y se continua con _CamelCase_.
+
+Un método fundamental es _dunder init_(`__init__`). Lo único que hace es inicializar la clase basado en los parámetros que le damos al momento de construir la clase.
+
+`self` es una referencia a la clase. Es una forma interna por la que podemos acceder a las propiedades y métodos.
