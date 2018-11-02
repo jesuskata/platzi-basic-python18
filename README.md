@@ -9,6 +9,7 @@
   - [Operaciones con Strings](#operaciones-con-strings)
   - [Slices en Python](#slices-en-python)
   - [For loops](#for-loops)
+  - [Decoradores](#decoradores)
 
 Este es un curso introductorio para aprender a programar con Python de Platzi. Es la última actualización de 2018 con David Aroesti nuevamente como profesor.
 
@@ -176,3 +177,24 @@ for [variable] in [secuencia]:
 Es una convención usar la letra `i` como variable en nuestro for, pero podemos colocar la que queramos.
 
 __range__: Nos da un objeto rango, es un iterador sobre el cual podemos generar secuencias.
+
+## Decoradores
+
+__Programación por procesos__: Esta técnica consiste en basarse de un número muy bajo de expresiones repetidas, englobarlas todas en un procedimiento o función y llamarlo cada vez que tenga que ejecutarse.
+
+__Python__ es un lenguaje que acepta diversos paradigmas como _programación orientada a objetos_ y la _programación funcional_, siendo estos los temas de nuestro siguiente módulo.
+
+- Los __decoradores__ son una función que envuelve a otra función para modificar o extender su comportamiento.
+
+- En __Python__ las funciones son ciudadanos de primera clase, _first class citizen_, esto significan que las funciones pueden recibir funciones como parámetros y pueden regresar funciones. Los decoradores utilizan este concepto de manera fundamental.
+
+```python
+def lower_case(func):
+    def wrapper():
+        # Execute code before
+        result = func()
+        # Execute code after
+        return result
+
+    return wrapper
+```
