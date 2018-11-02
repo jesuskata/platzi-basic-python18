@@ -10,6 +10,7 @@
   - [Slices en Python](#slices-en-python)
   - [For loops](#for-loops)
   - [Decoradores](#decoradores)
+    - [__Args y kwargs__](#args-y-kwargs)
 
 Este es un curso introductorio para aprender a programar con Python de Platzi. Es la última actualización de 2018 con David Aroesti nuevamente como profesor.
 
@@ -197,4 +198,60 @@ def lower_case(func):
         return result
 
     return wrapper
+```
+
+__Otro concepto de decoradores__: sirven para ejecutar lógica del código antes y/o después de otra función, esto nos ayuda a generar funciones y código que pueda ser reutilizado fácilmente sin hacer más extenso nuestro código. Hay que recordar que si se genera una función dentro de otra, solo existirá en ese _scope_(dentro de la función padre), si se quiere invocar una función varias veces dentro de otras se tiene que generar de manera global.
+
+### __Args y kwargs__
+
+Pasan tal cual los valores de los argumentos que se le dan a la función. Los __args__ hacen referencia a _listas_ y los __kwargs__ a elementos de un _diccionario_ (llave: valor). Por ejemplo:
+
+Ejemplo de __args__
+
+```python
+def test_value_args(n_arg, *args):
+    print(f'First normal value: {n_arg}')
+
+    for arg in args:
+        print(f'This is one of the *args values: {arg}')
+
+    print(type(args)) # tuple
+    print(type(n_arg)) # str
+
+
+if __name__ == '__main__':
+    test_value_args('jesus', 'eloisa', 'tiana', 'aleisa', 'jana')
+```
+
+- El tipo de valor es una tupla
+- Son convertidos los argumentos separados por _coma_
+
+Ejemplo de __wargs__
+
+```python
+def test_value_kwargs(**kwargs):
+    if kwargs is not None:
+        for key, value in kwargs.items():
+            print(f'{key} == {value}')
+
+    print(type(kwargs))
+
+
+if __name__ == '__main__':
+    test_value_kwargs(family1 = 'Romero', family2 = 'Camarillo')
+```
+
+Ejemplo de __args y kwargs__
+
+```python
+def test_value_args_kwargs(*args, **kwargs):
+    print(type(args))
+    print(args)
+    print('*' * 50)
+    print(type(kwargs))
+    print(kwargs)
+
+
+if __name__ == '__main__':
+    test_value_args_kwargs('jesus', 'eloisa', family = 'Romero Camarillo', city = 'Huajuapan')
 ```
