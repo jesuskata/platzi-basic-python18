@@ -1,9 +1,10 @@
 from setuptools import setup
 
+
 setup(
     name='pv',
     version='0.1',
-    pv_modules=['pv'],
+    py_modules=['pv'],
     install_requires=[
         'Click',
     ],
