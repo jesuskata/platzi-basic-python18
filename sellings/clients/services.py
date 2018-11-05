@@ -1,6 +1,6 @@
 import csv
 
-from models import Client
+from clients.models import Client
 
 
 class ClientService:
