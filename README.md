@@ -1,23 +1,24 @@
 # Curso de Python 2018 de Platzi con David Aroesti
 
 - [Curso de Python 2018 de Platzi con David Aroesti](#curso-de-python-2018-de-platzi-con-david-aroesti)
-    - [Palabras reservadas de Python](#palabras-reservadas-de-python)
-    - [Variables y expresiones](#variables-y-expresiones)
-    - [Funciones](#funciones)
-    - [Estructuras condicionales](#estructuras-condicionales)
-    - [Strings en Python](#strings-en-python)
-    - [Operaciones con Strings](#operaciones-con-strings)
-    - [Slices en Python](#slices-en-python)
-    - [For loops](#for-loops)
-    - [Decoradores](#decoradores)
-        - [__Args y kwargs__](#args-y-kwargs)
-    - [Programación orientada a objetos](#programaci%C3%B3n-orientada-a-objetos)
-    - [Scopes and namespaces](#scopes-and-namespaces)
-        - [Name o scope](#name-o-scope)
-        - [Namespace](#namespace)
-            - [Reglas de palabra clave global](#reglas-de-palabra-clave-global)
-    - [Introducción a Click](#introducci%C3%B3n-a-click)
-    - [Manejo de errores y jerarquía de errores en Python](#manejo-de-errores-y-jerarqu%C3%ADa-de-errores-en-python)
+  - [Palabras reservadas de Python](#palabras-reservadas-de-python)
+  - [Variables y expresiones](#variables-y-expresiones)
+  - [Funciones](#funciones)
+  - [Estructuras condicionales](#estructuras-condicionales)
+  - [Strings en Python](#strings-en-python)
+  - [Operaciones con Strings](#operaciones-con-strings)
+  - [Slices en Python](#slices-en-python)
+  - [For loops](#for-loops)
+  - [Decoradores](#decoradores)
+    - [__Args y kwargs__](#args-y-kwargs)
+  - [Programación orientada a objetos](#programaci%C3%B3n-orientada-a-objetos)
+  - [Scopes and namespaces](#scopes-and-namespaces)
+    - [Name o scope](#name-o-scope)
+    - [Namespace](#namespace)
+      - [Reglas de palabra clave global](#reglas-de-palabra-clave-global)
+  - [Introducción a Click](#introducci%C3%B3n-a-click)
+  - [Manejo de errores y jerarquía de errores en Python](#manejo-de-errores-y-jerarqu%C3%ADa-de-errores-en-python)
+  - [Context managers](#context-managers)
 
 Este es un curso introductorio para aprender a programar con Python de Platzi. Es la última actualización de 2018 con David Aroesti nuevamente como profesor.
 
@@ -446,3 +447,50 @@ except TakeOffError as error:
 ![Errores y jerarquías de errores](./assets/errores-python1.jpg)
 
 ![Errores y jerarquías de errores](./assets/errores-python2.jpg)
+
+## Context managers
+
+Los _context managers_ son objetos de Python que proveen información contextual adicional al bloque de código. Esta información consiste en correr una función (o cualquier callable) cuando se inicia el contexto con el keyword `with`; al igual que correr otra función cuando el código dentro del bloque `with` concluye. Por ejemplo:
+
+```python
+with open(‘some_file.txt’) as f:
+    lines = f.readlines()
+```
+
+Si estás familiarizado con este patrón, sabes que llamar la función `open` de esta manera, garantiza que el archivo se cierre con posterioridad. Esto disminuye la cantidad de información que el programador debe manejar directamente y facilita la lectura del código.
+
+Existen dos formas de implementar un _context manager_: con una __clase__ o con un __generador__. Vamos a implementar la funcionalidad anterior para ilustrar el punto:
+
+```python
+class CustomOpen(object):def__init__(self, filename):
+        self.file = open(filename)
+
+    def__enter__(self):return self.file
+
+    def__exit__(self, ctx_type, ctx_value, ctx_traceback):
+        self.file.close()
+
+with CustomOpen('file') as f:
+    contents = f.read()
+```
+
+Esta es simplemente una _clase_ de Python con dos métodos adicionales: `enter` y `exit`. Estos métodos son utilizados por el keyword `with` para determinar las acciones de inicialización, entrada y salida del contexto.
+
+El mismo código puede implementarse utilizando el módulo `contextlib` que forma parte de la librería estándar de Python.
+
+```python
+from contextlib import contextmanager
+
+@contextmanager
+def custom_open(filename):
+    f = open(filename)
+    try:
+        yield f
+    finally:
+        f.close()
+
+with custom_open('file') as f:
+    contents = f.read()
+```
+
+El código anterior funciona exactamente igual que cuando lo escribimos con una _clase_. La diferencia es que el código se ejecuta al inicializarse el contexto y retorna el control cuando el keyword `yield` regresa un valor. Una vez que termina el bloque `with`, el _context manager_ toma de nueva cuenta el control y ejecuta el código de limpieza.
