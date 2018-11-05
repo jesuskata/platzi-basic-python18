@@ -1,22 +1,23 @@
 # Curso de Python 2018 de Platzi con David Aroesti
 
 - [Curso de Python 2018 de Platzi con David Aroesti](#curso-de-python-2018-de-platzi-con-david-aroesti)
-  - [Palabras reservadas de Python](#palabras-reservadas-de-python)
-  - [Variables y expresiones](#variables-y-expresiones)
-  - [Funciones](#funciones)
-  - [Estructuras condicionales](#estructuras-condicionales)
-  - [Strings en Python](#strings-en-python)
-  - [Operaciones con Strings](#operaciones-con-strings)
-  - [Slices en Python](#slices-en-python)
-  - [For loops](#for-loops)
-  - [Decoradores](#decoradores)
-    - [__Args y kwargs__](#args-y-kwargs)
-  - [Programación orientada a objetos](#programaci%C3%B3n-orientada-a-objetos)
-  - [Scopes and namespaces](#scopes-and-namespaces)
-    - [Name o scope](#name-o-scope)
-    - [Namespace](#namespace)
-      - [Reglas de palabra clave global](#reglas-de-palabra-clave-global)
-  - [Introducción a Click](#introducci%C3%B3n-a-click)
+    - [Palabras reservadas de Python](#palabras-reservadas-de-python)
+    - [Variables y expresiones](#variables-y-expresiones)
+    - [Funciones](#funciones)
+    - [Estructuras condicionales](#estructuras-condicionales)
+    - [Strings en Python](#strings-en-python)
+    - [Operaciones con Strings](#operaciones-con-strings)
+    - [Slices en Python](#slices-en-python)
+    - [For loops](#for-loops)
+    - [Decoradores](#decoradores)
+        - [__Args y kwargs__](#args-y-kwargs)
+    - [Programación orientada a objetos](#programaci%C3%B3n-orientada-a-objetos)
+    - [Scopes and namespaces](#scopes-and-namespaces)
+        - [Name o scope](#name-o-scope)
+        - [Namespace](#namespace)
+            - [Reglas de palabra clave global](#reglas-de-palabra-clave-global)
+    - [Introducción a Click](#introducci%C3%B3n-a-click)
+    - [Manejo de errores y jerarquía de errores en Python](#manejo-de-errores-y-jerarqu%C3%ADa-de-errores-en-python)
 
 Este es un curso introductorio para aprender a programar con Python de Platzi. Es la última actualización de 2018 con David Aroesti nuevamente como profesor.
 
@@ -407,3 +408,41 @@ Tiene cuatro decoradores básicos:
 - @click_option: son parámetros opcionales
 
 Click también realiza las conversiones de tipo por nosotros. Esta basado muy fuerte en decoradores.
+
+## Manejo de errores y jerarquía de errores en Python
+
+_Python_ tiene una jerarquía rica de errores que nos da posibilidades para definir errores por si no se puede leer un archivo, dividir entre cero, si existen problemas en general en nuestro código _Python_ tirará un error. El problema con esto es que nuestro programa termina, es diferente a los errores de sintaxis donde nuestro programa nunca inicia.
+
+Para __aventar__ un error en _Python_ utilizamos la palabra `raise`.
+
+```python
+def divide(numerator, denominator):
+    if denominator == 0:
+        raise ZeroDivisionError
+```
+
+Aunque _Python_ nos ofrece muchos errores es buena práctica definir errores específicos de nuestra aplicación y usar los de _Python_ para extenderlos.
+
+Podemos generar nuestros propios errores creando una clase que extienda de `BaseException`.
+
+```python
+class TakeOffError(BaseException)
+```
+
+Si queremos evitar que termine nuestro programa cuando ocurra un error, debemos tener una estrategia. Debemos utilizar `try / except` cuando tenemos la posibilidad de que un pedazo de nuestro código falle.
+
+- __try__: significa ejecuta este código y si podemos solo colocamos una sola línea de código ahí como buena práctica
+- __except__: es nuestro manejo del error, es lo que haremos si ocurre el error. Debemos ser específicos con el tipo de error que vamos a atrapar.
+- __else__: Es código que se ejecuta cuando no ocurre ningún error.
+- __finally__: Nos permite obtener un bloque de código que se va a ejecutar no importa lo que pase.
+
+```python
+try:
+    airplane.takeoff()
+except TakeOffError as error:
+    airplane.land()
+```
+
+![Errores y jerarquías de errores](./assets/errores-python1.jpg)
+
+![Errores y jerarquías de errores](./assets/errores-python2.jpg)
